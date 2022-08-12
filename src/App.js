@@ -9,13 +9,17 @@ import Popup from "./components/Popup";
 import { showNotification as show } from "./helpers/Helpers";
 
 const App = () => {
-  const words = ["application", "programming", "interface", "wizard"];
-  const selectedWord = words[Math.floor(Math.random() * words.length)];
+  const words = ["application", "programming", "interface", "anjalwizard"];
+  const [selectedWord, setSelectedWord] = useState("");
 
   const [playable, setPlayable] = useState(true);
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
+
+  useEffect(() => {
+    setSelectedWord(words[Math.floor(Math.random() * words.length)]);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -51,7 +55,7 @@ const App = () => {
     setWrongLetters([]);
 
     const random = Math.floor(Math.random() * words.length);
-    selectedWord = words[random];
+    setSelectedWord(words[random]);
   }
 
   document.title = "Hangman Game";
